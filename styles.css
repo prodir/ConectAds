@@ -35,7 +35,7 @@ background-position: top left;
 nav {
 background-color: transparent;
 padding: 1rem 0;
-position: fixed;
+position: relative;
 top: 0;
 width: 100%;
 z-index: 1000;
@@ -49,11 +49,8 @@ transform: translateY(-100%);
 
 nav .container {
 display: flex;
-justify-content: space-between;
+justify-content: flex-start;
 align-items: center;
-width: 95%;
-max-width: 100%;
-padding: 0 1rem;
 }
 
 nav .logo {
@@ -76,6 +73,7 @@ height: 40px;
 nav .nav-links {
 list-style: none;
 display: flex;
+margin-left: auto;
 }
 
 nav .nav-links li {
@@ -93,19 +91,27 @@ nav .nav-links a:hover {
 color: #bec9de;
 }
 
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--texto);
+  cursor: pointer;
+  z-index: 1100;
+  margin-left: auto;
+}
+
 .frase-bajo-logo {
-position: absolute;
-top: 70px;
-left: 25px;
-z-index: 20;
-max-width: 300px;          /* no se extienda demasiado */
-padding: 0 0.5rem;         /* espacio interno */
+position: static;
+margin-left: 8.5rem;
+max-width: none;          /* no se extienda demasiado */
 word-wrap: break-word;     /* permite partir palabras */
-white-space: normal;       /* saltos de línea naturales */
+white-space: nowrap;       /* saltos de línea naturales */
+font-size: 1.2rem;
 }
 
 .frase-bajo-logo h3 {
-font-size: 1.8rem;
 line-height: 2rem;
 letter-spacing: 0.05rem;
 font-weight: 400;
@@ -123,34 +129,13 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   }
 }
 
-@media (max-width: 480px) {
-  .frase-bajo-logo {
-    position: absolute;
-    top: 1rem;                
-    left: 50%;               
-    transform: translateX(-50%); 
-    width: 90%;              
-    max-width: none;         
-    text-align: center;      
-    padding: 0 1rem;
-    z-index: 20;
-  }
-
-  .frase-bajo-logo h3 {
-    font-size: 1rem;
-    line-height: 1.3;
-    letter-spacing: 0.03rem;
-    /* mantiene misma animación */
-  }
-}
 
 /* HERO */
 .hero-img {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 100vh;
-  overflow: hidden;
+  min-height: auto;
   background: none;
 }
 
@@ -169,7 +154,6 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   height: 100%;
   background: rgba(0, 0, 0, 0.0);
   color: white;
-  padding: 12vh 4vw;
   display: block;
   z-index: 1;
 }
@@ -177,12 +161,12 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
 .hero-central {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
   width: 100%;
   max-width: 1800px;
-  margin: 5rem 2rem;
 }
+
 
 .hero-texto {
   flex: 0 0 70%;
@@ -190,6 +174,7 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   opacity: 0;
   transform: translateY(40px);
   transition: all 1s ease-out;
+  text-align: center;
 }
 
 .hero-texto.visible {
@@ -199,13 +184,11 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
 
 .hero-texto h1 {
   color: #1b263b;
-  font-size: 4.5rem;
-  margin-bottom: 1rem;
-  line-height: 1.2;
+  font-size: 4rem;
 }
 
 .hero-texto p {
-  font-size: 2.3rem;
+  font-size: 1.5rem;
   line-height: 5rem;
   letter-spacing: 0.001rem;
   font-weight: 400;
@@ -213,15 +196,13 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   color: #737373;
 }
 
-
 .hero-svg {
-  position: absolute;
-  top: 350px;
-  left: 87%;
-  transform: translateX(-50%);
-  width: 800px;
-  z-index: 1;
-  filter: drop-shadow(-25px 0px 40px rgba(0, 0, 0, 0.3));
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+  width: 70%;
+  margin-bottom: 1.5rem;
 }
 
 .hero-svg img {
@@ -231,6 +212,35 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   animation: respirar 6s ease-in-out infinite;
   filter: drop-shadow(0px 0px 40px rgba(0, 0, 0, 0.1));
 }
+ 
+
+/*BTN HERO*/ 
+  .btn.pastel {
+    font-size: 1.3rem;
+    padding: 1.5rem;
+    background-color: var(--texto);
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+  }
+  .btn.pastel:hover {
+    background-color: #94d1a3;
+    color: rgba(27, 38, 59, 0.678);
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.267);
+    font-weight: 700;
+  }
+  .btn-pastel-central {
+    width: auto !important;
+    margin: 1.5rem auto 0;
+  }
+  .btn-pastel-central.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
 
 @keyframes respirar {
   0%, 100% {
@@ -241,87 +251,9 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   }
 }
 
-.btn-pastel-central {
-  margin-top: 100px;
-  display: flex;
-  justify-content: center;
-  width: 80%;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 1s ease-out;
-}
-
-.btn-pastel-central.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (max-width: 768px) {
-
-  /* 1) NAV – mostrar siempre los enlaces */
-  nav .nav-links {
-    display: flex !important;            /* Fuerza que se vean */
-    flex-direction: column;              /* En columna en móvil */
-    position: static;                    /* No los posicionamos encima */
-    background: transparent;             /* Sin fondo extra */
-    width: 100%;                         /* Ocupan todo el ancho */
-    margin-top: 0.5rem;
-  }
-  nav .nav-links li {
-    margin: 0.5rem 0;                    /* Un poco de espacio entre items */
-  }
-
-  /* 2) HERO – flex vertical y centrado */
-  .hero-central {
-    display: flex;
-    flex-direction: column !important;   /* Una columna: texto → imagen → botón */
-    align-items: center;                 /* Centrar horizontalmente */
-    margin: 2rem 1rem;                   /* Reducir márgenes */
-  }
-
-  /* Ajustes texto */
-  .hero-texto {
-    max-width: 100%;
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-
-  /* La imagen del “planeta” pasa a ser relativa y centrada */
-  .hero-svg {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    transform: none !important;
-    width: 70%;        /* Ajusta el tamaño */
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-svg img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  /* El botón pasa debajo, centrado y con margen */
-  .btn-pastel-central {
-    width: auto !important;
-    margin: 1.5rem auto 0;
-  }
-
-  /* Asegúrate de reducir también el tamaño del H1 si es necesario */
-  .hero-texto h1 {
-    font-size: 2.2rem;
-    line-height: 1.2;
-  }
-  .hero-texto p {
-    font-size: 1rem;
-    line-height: 1.4;
-  }
-}
-/*Edicion de img*/
 
 /* Servicios */
 .services {
-  padding: 2rem 2rem;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -410,31 +342,10 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   line-height: 1.6;
 }
 
-/* Responsive */
-@media screen and (max-width: 768px) {
-  .services {
-    padding: 2rem 1rem;
-  }
-
-  .service-cards {
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .service-card {
-    max-width: 100%;
-  }
-
-  .services h2 {
-    font-size: 2.2rem;
-    margin-bottom: 2rem;
-  }
-}
-
 /*RESULTADOS REALES*/
 .resultados {
   color: var(--texto);
-  padding: 2rem 2rem;
+  padding: 2rem;
   text-align: center;
 }
 
@@ -537,161 +448,13 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   line-height: 1.6;
 }
 
-/* Responsive */
-@media screen and (max-width: 768px) {
-  .fullwidth-wrapper {
-    padding: 0 1rem;
-  }
-  .resultado-horizontal {
-    flex-direction: column;
-  }
-  .resultado-texto {
-    text-align: center;
-  }
-  .resultados h2 {
-    font-size: 2.2rem;
-  }
-  .resultados-intro {
-    font-size: 1rem;
-  }
-}
+
+
 
 
 /* SOBRE MÍ – layout principal */
-.sobre-mi {
-  min-height: 100%;          /* Ocupa al menos toda la altura de la ventana */
-  display: flex;              /* Flex para centrar verticalmente */
-  align-items: center;        /* Centra verticalmente el contenido */
-  /* opcional: si quieres centrar horizontal también */
-  justify-content: center;    /* Centra horizontalmente la container */
-  padding: 10px;                 /* Opcional: ajusta padding si lo necesitas */
-}
 
-.sobre-mi-titulo {
-  width: 100%;
-  text-align: center;
-  font-size: 5rem;
-  font-weight: 400;
-  font-family: 'Alex Brush', cursive;
-  color: var(--texto);
-}
 
-.sobre-mi-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 1rem;
-  padding: 5px;
-  padding-left: 10rem;
-}
-
-/* Columna de imagen + certificaciones */
-.sobre-mi-img-vertical {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Foto de perfil */
-.sobre-mi-img-vertical .perfil-img {
-  width: 360px;
-  height: 580px;
-  object-fit: cover;
-  border-radius: 0.5rem;
-  border: 4px solid #2c3e50;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-}
-
-/* Insignias debajo de la foto */
-.certificaciones {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.certificacion {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-}
-
-/* Fila de certificaciones */
-.sobre-mi-img-vertical .certificaciones {
-  display: flex;
-  flex-direction: row;
-}
-
-/* Cada insignia */
-.sobre-mi-img-vertical .certificacion {
-  width: 150px;
-  height: 150px;
-  object-fit: contain;
-}
-
-/* Columna de texto + botón */
-.sobre-mi-texto-ancho {
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 1.5rem;
-  padding-right: 10rem;
-}
-
-.sobre-mi-texto-ancho h2{
-  font-family: 'Alex Brush', cursive;
-  font-weight: 400;
-  font-size: 3rem;
-  color: #94d1a3;
-}
-
-.p {
-  font-weight: 700;
-  padding: 1rem;
-  color: #000000;
-}
-
-/* Asegurar que el botón quede alineado a la izquierda o lo que prefieras */
-.sobre-mi-texto-ancho .btn.pastel {
-  align-self: center; /* o flex-end para la derecha */
-  margin-top: 6rem;
-  border-radius: 3rem;
-}
-
-.btn.pastel {
-  font-size: 1.3rem;
-  padding: 1.4rem 5rem;
-  background-color: var(--texto);
-  color: white;
-  border-radius: 10px;
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
-  display: inline-block;
-}
-
-.btn.pastel:hover {
-  background-color: #94d1a3;
-  color: rgba(27, 38, 59, 0.678);
-  transform: scale(1.2);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.267);
-  font-weight: 700;
-}
-
-/* Responsive: en móviles apilar verticalmente */
-@media (max-width: 900px) {
-  .sobre-mi-container {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .sobre-mi-texto-ancho .btn.pastel {
-    align-self: center;
-  }
-}
 
 
 /* FAQs */
@@ -757,21 +520,6 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   line-height: 1.6;
 }
 
-/* Responsive */
-@media screen and (max-width: 768px) {
-  .faqs h2 {
-    font-size: 2.2rem;
-  }
-
-  .faq-item h3 {
-    font-size: 1.2rem;
-  }
-
-  .faq-item p {
-    font-size: 1rem;
-  }
-}
-
 
 /* --- TESTIMONIOS --- */
 
@@ -781,28 +529,6 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
     background-color: rgba(0, 0, 0, 0.04);
   }
 
-  /* Nuevo wrapper para las tarjetas */
-.testimonios .testimonial-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 600px); /* siempre 2 columnas de 300px */
-  gap: 2rem;                                /* espacio entre cards */
-  justify-content: center;                 /* centra el grid en el contenedor */
-  margin: 0 auto;                           /* centra lateralmente */
-  padding: 0 1rem;                          /* un poquito de padding */
-}
-
-  .testimonios .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 600px));
-    gap: 2rem;
-    justify-content: center;
-    justify-items: center;
-    align-items: start;
-    padding: 0 2rem;
-  }
-
-
-  
   .testimonios h2 {
     grid-column: 1 / -1;
     text-align: center;
@@ -812,56 +538,28 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
     font-family: 'Alex Brush', cursive;
   }
   
-  .testimonial-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-  }
-  
-  .testimonial-card {
-    background-color: #ffffff;
-    border-radius: 1.5rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    padding: 2rem;
-    flex: 1 1 300px;
-    max-width: 350px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .testimonial-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
-  }
-  
-  .testimonial-card p {
-    font-size: 1.2rem;
-    color: #444;
-    margin-bottom: 1rem;
-  }
-  
-  .testimonial-card h4 {
-    font-size: 1rem;
-    color: #666;
-  }
-/* Estado inicial: ocultas y ligeramente desplazadas */
-  .testimonial-rect {
-    width: 100%;             /* ancho fijo */
-    max-width: 600px;
-    height: auto;
-    display: flex;            /* para centrar contenido si quieres */
-    flex-direction: column;
-    justify-content: flex-start;  /* centrar vertical */
-    padding: 1.5rem;          /* ajustar padding interior */
-    border-radius: 1rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    transition: 
-    background-color 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.3s ease,
-    filter 0.3s ease;
-  }
+/* Grid de 2×2 para desktop */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales */
+  gap: 2rem;                             /* separación */
+  justify-items: center;                 /* centrar cada tarjeta */
+  padding: 0 2rem;
+}
+
+/* Tus tarjetas */
+.testimonial-rect {
+  width: 100%;
+  max-width: 750px;                       /* ancho máximo razonable */
+  box-sizing: border-box;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+}
 
 /* Logo dentro de la tarjeta */
 .testimonial-rect .testimonial-logo img {
@@ -910,16 +608,7 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
     color: #666;
   }
   
-/* Responsive a una columna en móvil */
-@media screen and (max-width: 768px) {
-  .testimonios .container {
-    grid-template-columns: 1fr;
-    padding: 0 1rem;
-  }
-  .testimonial-rect {
-    width: 100%;
-  }
-}
+  
   
 /* --- CONTACTO y FORMULARIO --- */
 .contacto {
@@ -1040,27 +729,6 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   }
 }
 
-/* Responsive: apila en móvil */
-@media (max-width: 768px) {
-  .contacto-grid {
-    flex-direction: column;
-  }
-  .contacto-whatsapp,
-  .contacto-form-container {
-    flex: 1 1 100%;
-    width: 100%;
-    padding: 0 1rem;
-    box-sizing: border-box;
-  }
-  .contacto-whatsapp {
-    text-align: center;
-  }
-  .form-contacto .btn-pastel-form {
-    align-self: center;
-  }
-}
-
-
 /* Footer */
 .footer {
   background-color: var(--fondo-claro);
@@ -1137,18 +805,6 @@ span {
   font-weight: 700;
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-  .social-icons a {
-    font-size: 1.5rem;
-    margin: 0 0.5rem;
-  }
-  .footer-links {
-    gap: 1rem;
-  }
-}
-
-
 /* Icono flotante WhatsApp */
 .whatsapp-float {
   position: fixed;
@@ -1180,3 +836,238 @@ span {
   transform: scale(1.2);
   opacity: 0.9;
 }
+
+
+@media (max-width: 768px) {
+    /* 2) HERO – solo en móvil */
+      /* Mostrar hamburguesa, ocultar links */
+  .nav-toggle {
+    display: block;
+    position: absolute;
+    top: 50%;                 /* 50% de la altura del nav */
+    right: 1rem;              /* a 1rem del borde derecho */
+    transform: translateY(-50%); /* lo centra perfectamente vertical */
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--texto);
+    cursor: pointer;
+  }
+  nav .container {
+    padding: 0 1rem;
+    width: 100%;
+    max-width: 100%;
+  }
+  .nav-links {
+    display: none !important;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: auto;
+    max-width: calc(100% - 2rem) !important;
+    box-sizing: border-box;
+    width: calc(100% - 2rem);     /* deja 1rem de margen a cada lado */
+    flex-direction: column;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 1rem;
+  }
+  .nav-links.open {
+    display: flex !important;
+  }
+  .nav-links li {
+    margin: 0.5rem 0;
+  }
+  .nav-links a {
+    display: block;
+    width: 100%;
+  }
+  .frase-bajo-logo {
+      position: static !important;
+      top: auto !important;
+      left: auto !important;
+      transform: none !important;
+      margin: 0 0 0 0.5rem;  /* un pequeño espacio a la derecha del logo */
+      padding: 0;           /* quita cualquier padding extra */
+      white-space: nowrap;     /* evita saltos extraños */
+  }
+  .frase-bajo-logo h3 {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+    .hero-central {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 2rem auto;
+      max-width: 100%;
+      width: 100%;
+    }
+    .hero-texto {
+      max-width: 100%;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+      /* Reset de hero-overlay para que no añada scroll */
+    .hero-overlay {
+      box-sizing: border-box;
+      padding: 12vh 2vw;
+      width: 100%;
+      max-width: 100%;
+    }
+    /* Texto: tamaños más razonables y line-heights ajustados */
+  .hero-texto h1 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: .5rem !important;
+  }
+  .hero-texto p {
+    font-size: 1rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 1rem !important;
+  }
+
+    .hero-svg {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      transform: none !important;
+      width: 80% !important;
+      margin-bottom: 1.5rem;
+      margin: 1rem auto;
+    }
+    .hero-svg img {
+      max-width: 100%;
+      height: auto !important;
+      min-height: auto !important;
+    }
+    .hero-overlay {
+      box-sizing: border-box;
+      padding: 10vh 5vw !important;
+      width: 100%;
+    }
+    .btn-pastel-central {
+      display: block;
+      margin: 1.5rem auto 0;
+    }
+    /* … cualquier otro ajuste específico de hero … */
+  /* Elimina cualquier padding excesivo */
+  .sobre-mi-container,
+  .fullwidth-wrapper,
+  .contacto-grid,
+  .testimonial-grid,
+  .services,
+  .testimonios .container,
+  .resultado-horizontal,
+  .resultado-horizontal.invertida,
+  .footer-content {
+    padding: 0 1rem !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: none !important;
+    flex-direction: column;
+  }
+
+  .fullwidth-wrapper {
+    padding: 0 1rem;
+  }
+ 
+  .resultados h2 {
+    font-size: 2.2rem;
+  }
+  .resultados-intro {
+    font-size: 1rem;
+  }
+
+  /* Asegura que no haya 10rem extras en Sobre Mí */
+  .sobre-mi-container {
+    padding-left: 0 !important;
+  }
+
+  /* Grid de testimonios a 1 columna */
+  .testimonial-grid {
+    padding: 0 1rem !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  .testimonial-rect {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .faqs h2 {
+    font-size: 2.2rem;
+  }
+
+  .faq-item h3 {
+    font-size: 1.2rem;
+  }
+
+  .faq-item p {
+    font-size: 1rem;
+  }
+
+
+  /*FORMULARIO DE CONTACTO*/
+  .contacto-grid {
+    flex-direction: column;
+  }
+  .contacto-whatsapp,
+  .contacto-form-container {
+    flex: 1 1 100%;
+    width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+  .contacto-whatsapp {
+    text-align: center;
+  }
+  .form-contacto .btn-pastel-form {
+    align-self: center;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .footer-logo {
+    margin: 0 auto;
+    text-align: center;    /* centramos el logo */
+  }
+
+  .footer-logo img {
+    display: inline-block;
+    margin: 0 auto;        /* centrado horizontal */
+    max-width: 280px;      /* ajústalo a tu gusto */
+    max-height: 150px;
+  }
+
+  .footer-center {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: none;
+    position: static;
+
+  }
+
+  .social-icons {
+    order: 1;              /* después del logo */
+  }
+
+  .footer-links {
+    order: 2;              /* debajo de los íconos */
+  }
+
+  .footer-copy {
+    order: 3;              /* al final */
+  }
+}
+

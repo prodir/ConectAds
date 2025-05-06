@@ -35,11 +35,15 @@
 <body>
 
 <!-- Navegación -->
-<nav>
+  <nav>
     <div class="container">
         <a href="#" class="logo">
-            <img src="logo.png" alt="ConectAds Logo" />
-          </a>          
+          <img src="logo.png" alt="ConectAds Logo" />
+        </a>
+        <div class="frase-bajo-logo">
+          <h3>Conexiónes que venden</h3>
+        </div>
+        <button class="nav-toggle" aria-label="Abrir Menú">☰</button>          
       <ul class="nav-links">
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#servicios">Servicios</a></li>
@@ -50,9 +54,7 @@
       </ul>
     </div>
   </nav>
-  <div class="frase-bajo-logo">
-    <h3>Más que anuncios, conexiones que venden</h3>
-  </div>
+
 
   
 <!-- Hero -->
@@ -191,33 +193,6 @@
   <!-- Sobre Mí -->
   <section class="sobre-mi" id="sobre-mi">
     
-  <div class="container sobre-mi-container">
-    <h2 class="sobre-mi-titulo">Sobre mi</h2>
-    <div class="sobre-mi-img-vertical">
-      <img src="imgperfil.png" alt="Foto de Tamara" class="perfil-img" />
-      <div class="certificaciones">
-        <img src="certificado1.png" alt="Certificación Google Ads Search" class="certificacion">
-        <img src="certificado2.png" alt="Certificación Google Ads Display" class="certificacion">
-        <img src="certificado3.png" alt="Certificación Google Ads Video" class="certificacion">
-        <img src="certificado4.png" alt="Certificación Google Ads Analytics" class="certificacion">
-      </div>
-    </div>
-
-
-    <div class="sobre-mi-texto-ancho">
-      <h2>Hola! Soy Tamara Rossi</h2>
-      <p>
-        Soy Técnica en Marketing y Publicidad Digital y especialista en Google Ads, con certificaciones oficiales en Search, Video, Display y Analytics. Además, me especializo en la administración integral de redes sociales.
-        Mi pasión es ayudar a empresas y emprendedores a crecer mediante estrategias efectivas. En ConectAds, ofrezco una gestión completa de campañas que combina conocimiento técnico con una visión estratégica, buscando establecer conexiones significativas y personalizadas para lograr ventas y un crecimiento sostenible, adaptándome a las necesidades únicas de cada negocio.
-      </p>
-      <p class="p">
-        ¿Listo para Dejar de Perder Dinero en Publicidad Inefectiva?
-      </p>
-      <p>
-        ¡Solicita tu consulta gratuita y hablemos sobre cómo mis servicios pueden transformar tus resultados!
-      </p>
-      <a href="#contacto" class="btn pastel">¡Hablemos!</a>
-    </div>
   </section>
 
   <!-- Preguntas Frecuentes -->
@@ -474,6 +449,7 @@
   });
 </script>
 
+<!--script para slide right and left-->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const observer = new IntersectionObserver((entries) => {
@@ -491,6 +467,27 @@
     });
   });
 </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll('.resultado-horizontal');
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '0px 0px -20%', // dispara cuando quede 20% por debajo
+      threshold: 0
+    });
+    cards.forEach(card => observer.observe(card));
+  });
+</script>
+
+  
 
 <!-- Script animación slide-up para Servicios -->
 <script>
@@ -528,6 +525,38 @@
         }
       });
     });
+  });
+</script>
+
+<!--Script para estilo hamburguesa en el nav-->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.querySelector(".nav-toggle");
+    const links  = document.querySelector(".nav-links");
+    toggle.addEventListener("click", () => {
+      links.classList.toggle("open");
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.querySelector('.nav-toggle');
+    const links  = document.querySelector('.nav-links');
+
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('open');
+      // opcional: cambiar icono de hamburguesa a “X”
+      toggle.querySelector('i').classList.toggle('fa-bars');
+      toggle.querySelector('i').classList.toggle('fa-times');
+    });
+  });
+</script>
+
+<script>
+  const toggle = document.querySelector('.nav-toggle');
+  const links  = document.querySelector('.nav-links');
+  toggle.addEventListener('click', () => {
+    links.classList.toggle('open');
   });
 </script>
 
