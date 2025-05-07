@@ -59,7 +59,6 @@
   
 <!-- Hero -->
 <header id="inicio" class="hero-img">
-  <img src="img0tamy.png" alt="Hero Banner" class="hero-full-img" />
   <div class="hero-overlay">
     <div class="hero-central">
       <div class="hero-texto">
@@ -380,8 +379,8 @@
   <i class="fab fa-whatsapp"></i>
 </a>
 
-
-<script> // Efecto de aparición para la sección "sobre mí"
+<!--Efecto de aparición para la sección "sobre mí"-->
+<script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -396,7 +395,25 @@
   if (sobreMi) observer.observe(sobreMi);
 </script>
 
-  
+<!-- Script para tarjetas horizontales de Resultados Reales-->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const resultados = document.querySelectorAll('.resultado-horizontal');
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);  // dejamos de observar
+        }
+      });
+    }, {
+      threshold: 0,                // tan pronto como aparezca 1px
+      rootMargin: '0px 0px -100px 0px' // dispara 100px antes de entrar
+    });
+
+    resultados.forEach(el => observer.observe(el));
+  });
+</script>
   
 <!-- Script para el nav -->
   <script>
@@ -448,47 +465,7 @@
     targets.forEach(el => observer.observe(el));
   });
 </script>
-
-<!--script para slide right and left-->
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        } else {
-          entry.target.classList.remove("visible");
-        }
-      });
-    }, { threshold: 0.3 });
-
-    document.querySelectorAll(".resultado-horizontal").forEach(el => {
-      observer.observe(el);
-    });
-  });
-</script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const cards = document.querySelectorAll('.resultado-horizontal');
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          obs.unobserve(entry.target);
-        }
-      });
-    }, {
-      root: null,
-      rootMargin: '0px 0px -20%', // dispara cuando quede 20% por debajo
-      threshold: 0
-    });
-    cards.forEach(card => observer.observe(card));
-  });
-</script>
-
   
-
 <!-- Script animación slide-up para Servicios -->
 <script>
   window.addEventListener("DOMContentLoaded", () => {
@@ -506,7 +483,6 @@
     cards.forEach(card => observer.observe(card));
   });
 </script>
-
 
 <!-- Script para faqs-->
 <script>
@@ -530,15 +506,6 @@
 
 <!--Script para estilo hamburguesa en el nav-->
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const toggle = document.querySelector(".nav-toggle");
-    const links  = document.querySelector(".nav-links");
-    toggle.addEventListener("click", () => {
-      links.classList.toggle("open");
-    });
-  });
-</script>
-<script>
   document.addEventListener('DOMContentLoaded', () => {
     const toggle = document.querySelector('.nav-toggle');
     const links  = document.querySelector('.nav-links');
@@ -551,15 +518,5 @@
     });
   });
 </script>
-
-<script>
-  const toggle = document.querySelector('.nav-toggle');
-  const links  = document.querySelector('.nav-links');
-  toggle.addEventListener('click', () => {
-    links.classList.toggle('open');
-  });
-</script>
-
-
 </body>
 </html>

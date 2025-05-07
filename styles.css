@@ -134,9 +134,9 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
 .hero-img {
   position: relative;
   width: 100%;
-  height: 100%;
-  min-height: auto;
-  background: none;
+  background: url(img0tamy.png) center center / cover no-repeat;
+  padding: 6rem 2rem;     /* ajusta el espacio arriba/abajo según tu contenido */
+  box-sizing: border-box;
 }
 
 .hero-full-img {
@@ -147,34 +147,32 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
 }
 
 .hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.0);
-  color: white;
   display: block;
   z-index: 1;
 }
 
+/* Flex entre texto y SVG, contenedor relativo para el botón */
 .hero-central {
+  position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
   width: 100%;
-  max-width: 1800px;
+  margin: 0 auto;
 }
 
 
+/* Texto: 45% ancho, alineado a la izquierda */
 .hero-texto {
-  flex: 0 0 70%;
-  max-width: 70%;
+  flex: 0 0 45%;
+  max-width: 45%;
+  text-align: left;
   opacity: 0;
-  transform: translateY(40px);
-  transition: all 1s ease-out;
-  text-align: center;
+  transform: translateY(70px);
+  transition: all 2s ease-out;
 }
 
 .hero-texto.visible {
@@ -185,6 +183,7 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
 .hero-texto h1 {
   color: #1b263b;
   font-size: 4rem;
+  margin: 0 0 1rem;
 }
 
 .hero-texto p {
@@ -194,15 +193,17 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   font-weight: 400;
   font-family: 'Alex Brush', cursive;
   color: #737373;
+  margin: 0 0 1rem;
 }
 
+/* SVG: 45% ancho, alineado a la derecha */
 .hero-svg {
-  position: relative !important;
-  top: auto !important;
-  left: auto !important;
-  transform: none !important;
-  width: 70%;
-  margin-bottom: 1.5rem;
+  flex: 0 0 45%;
+  max-width: 45%;
+  text-align: right;
+  position: static;
+  transform: none;
+  padding: 3rem 3rem;
 }
 
 .hero-svg img {
@@ -232,10 +233,15 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.267);
     font-weight: 700;
   }
-  .btn-pastel-central {
-    width: auto !important;
-    margin: 1.5rem auto 0;
-  }
+  /* Botón: posicionado abajo y centrado */
+.btn-pastel-central {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 1rem 2rem;
+}
   .btn-pastel-central.visible {
     opacity: 1;
     transform: translateY(0);
@@ -289,16 +295,16 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   backdrop-filter: blur(14px);                  /* efecto glass */
   border-radius: 1rem;
   padding: 2rem;
-  max-width: 340px;
+  max-width: 330px;
   text-align: center;
   transform: translateY(30px);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   transition:
     opacity 0.3s ease-out,
     transform 0.3s ease-out,
     background-color 0.3s ease,
     filter 0.3s ease,
-    box-shadow 0.4s ease;
+    box-shadow 0.3s ease;
 }
 
 .service-card.visible {
@@ -372,6 +378,12 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   flex-direction: row-reverse;
 }
 
+.resultado-horizontal.invertida:hover {
+  transform: scale(1.07) !important;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+}
+
 .fullwidth-wrapper {
   width: 100%;
   margin-left: 0;
@@ -382,10 +394,10 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
 
 /* Efecto entrada desde izquierda y derecha */
 .resultado-horizontal.slide-left {
-  transform: translateX(-1200px);
+  transform: translateX(-100%);
 }
 .resultado-horizontal.slide-right {
-  transform: translateX(1200px);
+  transform: translateX(100%);
 }
 
 /* Al hacerse visible */
@@ -864,7 +876,7 @@ span {
     top: 100%;
     right: 0;
     width: auto;
-    max-width: calc(100% - 2rem) !important;
+    max-width: calc(100% - 2rem);
     box-sizing: border-box;
     width: calc(100% - 2rem);     /* deja 1rem de margen a cada lado */
     flex-direction: column;
@@ -883,39 +895,45 @@ span {
     width: 100%;
   }
   .frase-bajo-logo {
-      position: static !important;
-      top: auto !important;
-      left: auto !important;
-      transform: none !important;
-      margin: 0 0 0 0.5rem;  /* un pequeño espacio a la derecha del logo */
-      padding: 0;           /* quita cualquier padding extra */
-      white-space: nowrap;     /* evita saltos extraños */
+    position: static;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: 0 0 0 8.0rem;  /* un pequeño espacio a la derecha del logo */
+    padding: 0;           /* quita cualquier padding extra */
+    white-space: nowrap;     /* evita saltos extraños */
   }
   .frase-bajo-logo h3 {
     font-size: 1rem;
     line-height: 1.3;
   }
-    .hero-central {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 2rem auto;
-      max-width: 100%;
-      width: 100%;
+  .hero-central {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    width: 100%;
     }
-    .hero-texto {
-      max-width: 100%;
-      text-align: center;
-      margin-bottom: 1rem;
+  .hero-texto {
+    max-width: 100%;
+    width: 100%;
+    flex: 0 0 auto;
+    text-align: center;
+    margin-bottom: 1rem;
     }
-      /* Reset de hero-overlay para que no añada scroll */
-    .hero-overlay {
-      box-sizing: border-box;
-      padding: 12vh 2vw;
-      width: 100%;
-      max-width: 100%;
+  .hero-img { /* que la caja se expanda con su contenido */
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
     }
-    /* Texto: tamaños más razonables y line-heights ajustados */
+/* Reset de hero-overlay para que no añada scroll */
+  .hero-overlay {
+    box-sizing: border-box;
+    padding-bottom: 2rem;
+    width: 100%;
+    max-width: 100%;
+    }
+/* Texto: tamaños más razonables y line-heights ajustados */
   .hero-texto h1 {
     font-size: 2rem !important;
     line-height: 1.2 !important;
@@ -927,28 +945,26 @@ span {
     margin-bottom: 1rem !important;
   }
 
-    .hero-svg {
-      position: relative !important;
-      top: auto !important;
-      left: auto !important;
-      transform: none !important;
-      width: 80% !important;
-      margin-bottom: 1.5rem;
-      margin: 1rem auto;
+  .hero-svg {
+    position: relative;
+    transform: none;
+    width: 100%;
+    flex: 0 0 auto;
+    max-width: 100%;
+    text-align: center;
     }
-    .hero-svg img {
-      max-width: 100%;
-      height: auto !important;
-      min-height: auto !important;
+  .hero-svg img {
+    min-width: 90%;
+    max-width: 80%;
+    min-height: auto;
     }
-    .hero-overlay {
-      box-sizing: border-box;
-      padding: 10vh 5vw !important;
-      width: 100%;
+  .hero-overlay {
+    box-sizing: border-box;
+    width: 100%;
     }
-    .btn-pastel-central {
-      display: block;
-      margin: 1.5rem auto 0;
+  .btn-pastel-central {
+    position: static;
+    transform: none;
     }
     /* … cualquier otro ajuste específico de hero … */
   /* Elimina cualquier padding excesivo */
