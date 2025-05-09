@@ -16,10 +16,6 @@ font-family: 'Open Sans', Arial, sans-serif;
 scroll-behavior: smooth;
 }
 
-html {
-  overflow-x: hidden;
-}
-
 html, body {
 height: 100%;
 width: 100%;
@@ -31,49 +27,64 @@ background-size: auto;
 background-position: top left;
 }
 
-/* NAV */
-nav {
-background-color: transparent;
-padding: 1rem 0;
-position: relative;
-top: 0;
-width: 100%;
-z-index: 1000;
-box-shadow: none;
-transition: transform 0.3s ease-in-out;
+@font-face {
+  font-family: 'Bricolage Grotesque 36';
+  src: url('/fonts/BricolageGrotesque36-Regular.woff2') format('woff2'),
+       url('/fonts/BricolageGrotesque36-Regular.woff')  format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-.hide-nav {
-transform: translateY(-100%);
+/* NAV */
+nav {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+  box-sizing: border-box;        /* para que padding no sume ancho extra */
+  padding: 1rem;
 }
 
 nav .container {
-display: flex;
-justify-content: flex-start;
-align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;               /* un pequeño padding en los laterales */
+  box-sizing: border-box;
 }
 
 nav .logo {
 display: flex;
 align-items: center;
-gap: 0.5rem;
-font-size: 1.5rem;
-font-weight: 600;
-color: var(--texto);
-text-decoration: none;
-height: auto;
 transform: scale(4.5);
 transform-origin: left center;
+padding: 0.25rem;
 }
 
 nav .logo img {
-height: 40px;
+height: 37px;
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 8rem;      /* separa logo y frase */
 }
 
 nav .nav-links {
 list-style: none;
 display: flex;
-margin-left: auto;
+padding-right: 1rem;
+margin: 0;
+}
+/* cuando tenga .open, lo muestro */
+.nav-links.open {
+  display: flex !important;
+  flex-direction: column; /* o row si quieres */
 }
 
 nav .nav-links li {
@@ -94,32 +105,10 @@ color: #bec9de;
 .nav-toggle {
   display: none;
   background: none;
-  border: none;
   font-size: 1.8rem;
   color: var(--texto);
   cursor: pointer;
   z-index: 1100;
-  margin-left: auto;
-}
-
-.frase-bajo-logo {
-position: static;
-margin-left: 8.5rem;
-max-width: none;          /* no se extienda demasiado */
-word-wrap: break-word;     /* permite partir palabras */
-white-space: nowrap;       /* saltos de línea naturales */
-font-size: 1.2rem;
-}
-
-.frase-bajo-logo h3 {
-line-height: 2rem;
-letter-spacing: 0.05rem;
-font-weight: 400;
-font-family: 'Alex Brush', cursive;
-color: #737373;
-opacity: 0;
-transform: translateY(40px);
-animation: fadeInTop 0.3s ease-out 0.2s forwards;
 }
 
 @keyframes fadeInTop {
@@ -129,12 +118,16 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   }
 }
 
-
 /* HERO */
 .hero-img {
   position: relative;
   width: 100%;
-  background: url(img0tamy.png) center center / cover no-repeat;
+  height: 100%;
+  height: calc(100% - 77px);
+  background: url(img0tamy.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain auto;     /* 🚀 aquí está la clave */
   padding: 6rem 2rem;     /* ajusta el espacio arriba/abajo según tu contenido */
   box-sizing: border-box;
 }
@@ -160,15 +153,16 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   position: relative;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start; /* ← aquí */
   width: 100%;
-  margin: 0 auto;
+  gap: 2rem;
 }
 
 
 /* Texto: 45% ancho, alineado a la izquierda */
 .hero-texto {
-  flex: 0 0 45%;
-  max-width: 45%;
+  flex: 2 1 60%;
+  max-width: 60%;
   text-align: left;
   opacity: 0;
   transform: translateY(70px);
@@ -182,70 +176,67 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
 
 .hero-texto h1 {
   color: #1b263b;
-  font-size: 4rem;
-  margin: 0 0 1rem;
+  font-size: 5rem;
+  line-height: 1.2;  /* antes estaba demasiado grande */
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  margin-left: 1.3rem;
 }
 
 .hero-texto p {
-  font-size: 1.5rem;
-  line-height: 5rem;
-  letter-spacing: 0.001rem;
+  font-size: 1.8rem;
   font-weight: 400;
-  font-family: 'Alex Brush', cursive;
+  font-family: 'Bricolage Grotesque 36';
   color: #737373;
-  margin: 0 0 1rem;
+  margin-left: 1.3rem;
+  margin-top: 1rem;
 }
 
 /* SVG: 45% ancho, alineado a la derecha */
 .hero-svg {
-  flex: 0 0 45%;
-  max-width: 45%;
-  text-align: right;
+  flex: 1 1 40%;
+  max-width: none;
+  width: auto;
+  text-align: center;
   position: static;
   transform: none;
-  padding: 3rem 3rem;
+  margin-top: 7rem;
 }
 
 .hero-svg img {
   max-width: 60%;
-  max-height: 500px;
-  height: auto;
-  animation: respirar 6s ease-in-out infinite;
+  animation: respirar 5s ease-in-out infinite;
   filter: drop-shadow(0px 0px 40px rgba(0, 0, 0, 0.1));
 }
  
-
 /*BTN HERO*/ 
-  .btn.pastel {
-    font-size: 1.3rem;
-    padding: 1.5rem;
-    background-color: var(--texto);
-    color: white;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: all 0.3s ease-in-out;
-    display: inline-block;
-  }
-  .btn.pastel:hover {
-    background-color: #94d1a3;
-    color: rgba(27, 38, 59, 0.678);
-    transform: scale(1.1);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.267);
-    font-weight: 700;
-  }
-  /* Botón: posicionado abajo y centrado */
 .btn-pastel-central {
   position: absolute;
-  bottom: 2rem;
-  left: 50%;
+  bottom: -2rem;
+  left: 40%;
   transform: translateX(-50%);
-  margin: 0;
-  padding: 1rem 2rem;
 }
-  .btn-pastel-central.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.btn.pastel {
+  font-size: 1.3rem;
+  padding: 1.5rem;
+  background-color: var(--texto);
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+.btn.pastel:hover {
+  background-color: #94d1a3;
+  color: rgba(27, 38, 59, 0.678);
+  transform: scale(1.12);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.267);
+  font-weight: 700;
+}
+.btn-pastel-central.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
   
 
 @keyframes respirar {
@@ -253,7 +244,7 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
     transform: scale(1);
   }
   50% {
-    transform: scale(1.3);
+    transform: scale(1.25);
   }
 }
 
@@ -268,9 +259,9 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
 }
 
 .services h2 {
-  font-size: 4.7rem;
+  font-size: 4rem;
   font-weight: 400;
-  font-family: 'Alex Brush', cursive;
+  font-family: 'Bricolage Grotesque 36';
 }
 
 .servicios-subtitulo {
@@ -298,13 +289,12 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   max-width: 330px;
   text-align: center;
   transform: translateY(30px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   transition:
-    opacity 0.3s ease-out,
-    transform 0.3s ease-out,
-    background-color 0.3s ease,
-    filter 0.3s ease,
-    box-shadow 0.3s ease;
+    opacity 0.2s ease-out,
+    transform 0.2s ease-out,
+    background-color 0.2s ease,
+    filter 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .service-card.visible {
@@ -313,14 +303,14 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
 }
 
 /* Retrasos escalonados (stagger) */
-.service-cards .service-card:nth-child(1) { transition-delay: 0.05s; }
-.service-cards .service-card:nth-child(2) { transition-delay: 0.06s; }
-.service-cards .service-card:nth-child(3) { transition-delay: 0.07s; }
-.service-cards .service-card:nth-child(4) { transition-delay: 0.08s; }
-.service-cards .service-card:nth-child(5) { transition-delay: 0.09s; }
-.service-cards .service-card:nth-child(6) { transition-delay: 0.1s; }
-.service-cards .service-card:nth-child(7) { transition-delay: 0.12s; }
-.service-cards .service-card:nth-child(8) { transition-delay: 0.13s; }
+.service-cards .service-card:nth-child(1) { transition-delay: 0.03s; }
+.service-cards .service-card:nth-child(2) { transition-delay: 0.04s; }
+.service-cards .service-card:nth-child(3) { transition-delay: 0.05s; }
+.service-cards .service-card:nth-child(4) { transition-delay: 0.06s; }
+.service-cards .service-card:nth-child(5) { transition-delay: 0.07s; }
+.service-cards .service-card:nth-child(6) { transition-delay: 0.08s; }
+.service-cards .service-card:nth-child(7) { transition-delay: 0.09s; }
+.service-cards .service-card:nth-child(8) { transition-delay: 0.10s; }
 
 .service-card:hover {
   background-color: rgba(255, 255, 255, 0.747);
@@ -366,7 +356,7 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   max-width: 1600px;
   background: transparent;
   overflow: hidden;
-  transition: transform 1s ease, box-shadow 1s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .resultado-horizontal:hover {
@@ -409,7 +399,7 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
 .resultados h2 {
   font-size: 3.8rem;
   font-weight: 400;
-  font-family: 'Alex Brush', cursive;
+  font-family: 'Bricolage Grotesque 36';
 }
 .resultados-intro {
   max-width: 900px;
@@ -454,15 +444,6 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   margin-bottom: 1rem;
   color: #2c3e50;
 }
-.resultado-texto p {
-  font-size: 1.1rem;
-  color: #555;
-  line-height: 1.6;
-}
-
-
-
-
 
 /* SOBRE MÍ – layout principal */
 
@@ -478,7 +459,7 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
 .faqs h2 {
   font-size: 4.5rem;
   font-weight: 400;
-  font-family: 'Alex Brush', cursive;
+  font-family: 'Bricolage Grotesque 36';
   text-align: center;
   margin-bottom: 1rem;
   padding-bottom: 2rem;
@@ -532,23 +513,21 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   line-height: 1.6;
 }
 
-
 /* --- TESTIMONIOS --- */
-
 .testimonios {
-    padding: 4rem 2rem;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.04);
-  }
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.04);
+}
 
-  .testimonios h2 {
-    grid-column: 1 / -1;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-size: 4.5rem;
-    font-weight: 400;
-    font-family: 'Alex Brush', cursive;
-  }
+.testimonios h2 {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 4.5rem;
+  font-weight: 400;
+  font-family: 'Bricolage Grotesque 36';
+}
   
 /* Grid de 2×2 para desktop */
 .testimonial-grid {
@@ -586,7 +565,7 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   flex: 1;
 }
 
-  /* Logo a la izquierda */
+/* Logo a la izquierda */
 .testimonial-logo img {
   width: 80px;                /* ajusta tamaño */
   height: auto;
@@ -595,32 +574,32 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
   flex-shrink: 0;             /* que no reduzca su tamaño */
 }
 
-/* Contenido ocupa el resto */
-.testimonial-content {
-  flex: 1;
+
+/* Cuando tenga esta clase, quita el clamp */
+.testimonial-content p.expanded {
+  display: block;
+  -webkit-line-clamp: unset;
 }
 
-  .testimonial-rect:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
-    background-color: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
-    filter: brightness(1.05);
-  }
+.testimonial-rect:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+  filter: brightness(1.05);
+}
   
-  .testimonial-rect p {
-    font-size: 1.2rem;
-    color: #444;
-    overflow: auto;
-    margin-bottom: 1rem;
-  }
+.testimonial-rect p {
+  font-size: 1.2rem;
+  color: #444;
+  overflow: auto;
+  margin-bottom: 1rem;
+}
   
-  .testimonial-rect h4 {
-    font-size: 1rem;
-    color: #666;
-  }
-  
-  
+.testimonial-rect h4 {
+  font-size: 1rem;
+  color: #666;
+}
   
 /* --- CONTACTO y FORMULARIO --- */
 .contacto {
@@ -647,7 +626,7 @@ animation: fadeInTop 0.3s ease-out 0.2s forwards;
 .contacto-whatsapp h2 {
   font-size: 4rem;
   margin-bottom: 1rem;
-  font-family: 'Alex Brush', cursive;
+  font-family: 'Bricolage Grotesque 36';
   font-weight: 400;
 
 }
@@ -820,10 +799,10 @@ span {
 /* Icono flotante WhatsApp */
 .whatsapp-float {
   position: fixed;
-  bottom: 40px;
-  right: 50px;
+  bottom: 10px;
+  right: 20px;
   width: 60px;
-  height: 60px;
+  height: 50px;
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -832,43 +811,86 @@ span {
   text-decoration: none;
   color: #54e463;
 }
-
 .whatsapp-float img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   
 }
-
 .whatsapp-float i {
-  font-size: 4.3rem;
+  font-size: 4rem;
 }
-
 .whatsapp-float:hover {
   transform: scale(1.2);
   opacity: 0.9;
 }
 
+@media (max-width: 1366px) {
+  .hero-texto {
+    /* ej.: darle más ancho al h1 */
+    flex: 0 0 60%;
+    max-width: 60%;
+  }
+  .hero-svg {
+    /* reducir un poco el planeta */
+    flex: 0 0 40%;
+    max-width: 40%;
+    margin-top: 4rem;
+  }
+  .btn-pastel-central {
+    /* Ejemplo: bajar un poco y centrar */
+    position: absolute;
+    bottom: -4rem;     /* ajusta según lo que necesites */
+    left: 50%;
+    transform: translateX(-50%);
+    /* o usa top en lugar de bottom, margins, etc. */
+  }
+  
+  .hero-texto h1 {
+    font-size: 3.5rem;
+    letter-spacing: 0.2rem;
+    margin-bottom: 1.5rem;
+  }
+}
 
 @media (max-width: 768px) {
-    /* 2) HERO – solo en móvil */
       /* Mostrar hamburguesa, ocultar links */
+  nav {
+    height: 6rem;
+    position: relative;
+    padding: 0;
+  }
+  nav .logo {
+    transform: none !important;
+    max-height: 6rem;
+    height: auto;
+    margin-left: 0 !important;
+    padding-left: 0.5rem;       /* un poco de espacio si lo necesitas */
+    order: 1;
+  }
+  nav .logo img {
+    height: 10rem !important;    /* puedes probar también 30px o 40px */
+    width: auto;
+  }
   .nav-toggle {
     display: block;
     position: absolute;
-    top: 50%;                 /* 50% de la altura del nav */
+    top: 2rem;                 /* 50% de la altura del nav */
     right: 1rem;              /* a 1rem del borde derecho */
-    transform: translateY(-50%); /* lo centra perfectamente vertical */
     background: none;
     border: none;
-    font-size: 1.8rem;
-    color: var(--texto);
+    font-size: 1.6rem;
     cursor: pointer;
+    order: 3;
   }
   nav .container {
     padding: 0 1rem;
     width: 100%;
     max-width: 100%;
+    height: 100%;
+    flex-wrap: wrap;     /* permite filas múltiples */
+    align-items: center;
+
   }
   .nav-links {
     display: none !important;
@@ -894,18 +916,12 @@ span {
     display: block;
     width: 100%;
   }
-  .frase-bajo-logo {
-    position: static;
-    top: auto;
-    left: auto;
-    transform: none;
-    margin: 0 0 0 8.0rem;  /* un pequeño espacio a la derecha del logo */
-    padding: 0;           /* quita cualquier padding extra */
-    white-space: nowrap;     /* evita saltos extraños */
-  }
-  .frase-bajo-logo h3 {
-    font-size: 1rem;
-    line-height: 1.3;
+  .logo-group {
+    flex: 0 0 100%;      /* ocupa toda la fila */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* o center si prefieres centrado */
+    gap: 0.2rem;
   }
   .hero-central {
     display: flex;
@@ -915,16 +931,19 @@ span {
     width: 100%;
     }
   .hero-texto {
-    max-width: 100%;
-    width: 100%;
+    flex: none;
     flex: 0 0 auto;
+    max-width: 100%;
+    flex-basis: 100%; 
     text-align: center;
-    margin-bottom: 1rem;
+    opacity: 1;
+    transform: none;
     }
   .hero-img { /* que la caja se expanda con su contenido */
     height: auto !important;
     min-height: auto !important;
     overflow: visible !important;
+    padding: 0.1rem 1rem;
     }
 /* Reset de hero-overlay para que no añada scroll */
   .hero-overlay {
@@ -935,22 +954,20 @@ span {
     }
 /* Texto: tamaños más razonables y line-heights ajustados */
   .hero-texto h1 {
-    font-size: 2rem !important;
-    line-height: 1.2 !important;
-    margin-bottom: .5rem !important;
+    font-size: 2rem;
+    margin: 0.5rem auto 1rem; /* quita cualquier margin-left, y usa margin auto para centrar */
+    padding: 0 1rem;
+    letter-spacing: 0;
   }
   .hero-texto p {
-    font-size: 1rem !important;
-    line-height: 1.4 !important;
-    margin-bottom: 1rem !important;
+    font-size: 1rem;
   }
-
   .hero-svg {
     position: relative;
     transform: none;
-    width: 100%;
-    flex: 0 0 auto;
-    max-width: 100%;
+    max-width: 80%;
+    flex-basis: 80%; 
+    margin: 1rem auto 0;
     text-align: center;
     }
   .hero-svg img {
@@ -958,15 +975,25 @@ span {
     max-width: 80%;
     min-height: auto;
     }
-  .hero-overlay {
-    box-sizing: border-box;
-    width: 100%;
-    }
   .btn-pastel-central {
     position: static;
     transform: none;
+    margin: 2rem auto 0;
     }
-    /* … cualquier otro ajuste específico de hero … */
+
+    /*TARJETAS MAS CHICAS PARA EL RESPONSIVE*/
+    .service-cards {
+      gap: 1rem; /* menos espacio entre tarjetas */
+    }
+  
+    .service-card {
+      /* Ocupan como mucho el 80% del ancho y se centran */
+      flex: 1 1 75%;
+      max-width: 75%;
+      margin: 0 auto;
+      padding: 1.25rem; /* un poco menos de relleno */
+    }
+
   /* Elimina cualquier padding excesivo */
   .sobre-mi-container,
   .fullwidth-wrapper,
@@ -983,6 +1010,13 @@ span {
     max-width: 100% !important;
     transform: none !important;
     flex-direction: column;
+  }
+
+  .services .container h2{
+    font-size: 2.5rem;
+  }
+  .testimonios .container h2{
+    font-size: 3rem;
   }
 
   .fullwidth-wrapper {
@@ -1011,6 +1045,23 @@ span {
   .testimonial-rect {
     max-width: 100% !important;
     width: 100% !important;
+  }
+
+  .testimonial-content p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; /* Muestra sólo 3 líneas */
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .testimonial-content .read-more {
+    display: block;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
   }
 
   .faqs h2 {
@@ -1064,24 +1115,20 @@ span {
     max-height: 150px;
   }
 
-  .footer-center {
+.footer-center {
     order: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     transform: none;
     position: static;
-
   }
-
   .social-icons {
     order: 1;              /* después del logo */
   }
-
   .footer-links {
     order: 2;              /* debajo de los íconos */
   }
-
   .footer-copy {
     order: 3;              /* al final */
   }
