@@ -825,7 +825,7 @@ span {
   opacity: 0.9;
 }
 
-@media (max-width: 1366px) {
+@media (max-width: 1400px) {
   .hero-texto {
     /* ej.: darle más ancho al h1 */
     flex: 0 0 60%;
@@ -840,7 +840,7 @@ span {
   .btn-pastel-central {
     /* Ejemplo: bajar un poco y centrar */
     position: absolute;
-    bottom: -4rem;     /* ajusta según lo que necesites */
+    bottom: -7rem;     /* ajusta según lo que necesites */
     left: 50%;
     transform: translateX(-50%);
     /* o usa top en lugar de bottom, margins, etc. */
