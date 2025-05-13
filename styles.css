@@ -19,6 +19,7 @@ scroll-behavior: smooth;
 html, body {
 height: 100%;
 width: 100%;
+margin: 0;
 color: var(--texto);
 line-height: 1.6;
 background-image: url("img0tamy1.png");
@@ -39,6 +40,7 @@ background-position: top left;
 /* NAV */
 nav {
   position: relative;
+    height: 77px;
   top: 0;
   left: 0;
   right: 0;
@@ -122,13 +124,12 @@ color: #bec9de;
 .hero-img {
   position: relative;
   width: 100%;
-  height: 100%;
-  height: calc(100% - 77px);
+  min-height: calc(100% - 77px);
   background: url(img0tamy.png);
-  background-position: center center;
+  background-position: center;
   background-repeat: no-repeat;
-  background-size: contain auto;     /* 🚀 aquí está la clave */
-  padding: 6rem 2rem;     /* ajusta el espacio arriba/abajo según tu contenido */
+  background-size: cover;
+  padding: 6rem 2rem 8rem;
   box-sizing: border-box;
 }
 
