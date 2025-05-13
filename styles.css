@@ -128,7 +128,7 @@ color: #bec9de;
   background: url(img0tamy.png);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% auto;
   padding: 6rem 2rem 8rem;
   box-sizing: border-box;
 }
@@ -381,6 +381,7 @@ color: #bec9de;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  overflow-x: hidden;
 }
 
 /* Efecto entrada desde izquierda y derecha */
@@ -582,6 +583,11 @@ color: #bec9de;
   -webkit-line-clamp: unset;
 }
 
+/* 1) Por defecto (escritorio) oculto */
+.testimonial-content .read-more {
+  display: none;
+}
+
 .testimonial-rect:hover {
   transform: translateY(-15px);
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
@@ -650,7 +656,7 @@ color: #bec9de;
   padding: 1rem 2rem;
   background-color: var(--texto);
   color: #fff;
-  border-radius: 30px;
+  border-radius: 6px;
   text-decoration: none;
   transition: background-color 0.3s ease, transform 0.3s ease;
   transition: transform 0.3 ease, box-shadow 0.3s ease;
@@ -699,7 +705,7 @@ color: #bec9de;
   padding: 1rem 1rem;
   background-color: var(--texto);
   color: #fff;
-  border-radius: 30px;
+  border-radius: 6px;
   text-decoration: none;
 }
 
